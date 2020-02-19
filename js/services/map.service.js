@@ -39,6 +39,9 @@ function panTo(lat, lng) {
 }
 
 function getLocationName(loc) {
+    loc.lat = (getParameterByName('lat')) ? +getParameterByName('lat') : loc.lat;
+    loc.lng = (getParameterByName('lng')) ? +getParameterByName('lng') : loc.lng;
+    
     return new Promise((resolve, reject) => {
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${loc.lat},${loc.lng}&key=${API_KEY}`)
         .then(res=> resolve(res.data))

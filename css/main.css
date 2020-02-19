@@ -48,6 +48,17 @@ h1, h2, h3, h4, h5{
 .location{
     text-transform: capitalize;
 }
+.search {
+    max-width: 125px;
+}
 .flag{
     width: 1.5em;    
+}
+
+
+
+@media only screen and (min-width: 600px) {
+    .search {
+        max-width: none;
+    }
 }
