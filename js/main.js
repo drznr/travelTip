@@ -20,6 +20,12 @@ window.onload = () => {
         const locUrl = document.querySelector('.location h2').dataset.url;
         copyToClipBoard(locUrl);
     });
+    document.querySelector('.search').addEventListener("keyup", (ev) => {
+        if (ev.key === 'Enter') {
+          ev.preventDefault();
+          document.querySelector('.btn-submit').click();
+        }
+      });
 }
 
 
