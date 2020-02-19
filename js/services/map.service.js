@@ -1,15 +1,14 @@
 
-export default {
-    initMap,
-    addMarker,
-    panTo
-}
+import { getParameterByName } from '../utils.js'
 
 
 var map;
 
 
-export function initMap(lat = 32.0749831, lng = 34.9120554) {
+export function initMap(lat, lng) {
+    lat = (getParameterByName('lat')) ? +getParameterByName('lat') : lat;
+    lng = (getParameterByName('lng')) ? +getParameterByName('lng') : lng;
+
     return _connectGoogleApi()
         .then(() => {
             map = new google.maps.Map(
@@ -22,6 +21,9 @@ export function initMap(lat = 32.0749831, lng = 34.9120554) {
 }
 
 function addMarker(loc) {
+    loc.lat = (getParameterByName('lat')) ? +getParameterByName('lat') : loc.lat;
+    loc.lng = (getParameterByName('lng')) ? +getParameterByName('lng') : loc.lng;
+    
     var marker = new google.maps.Marker({
         position: loc,
         map: map,
@@ -51,3 +53,8 @@ function _connectGoogleApi() {
 
 
 
+export default {
+    initMap,
+    addMarker,
+    panTo
+}
