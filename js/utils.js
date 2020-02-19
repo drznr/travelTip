@@ -10,6 +10,17 @@ function getParameterByName(name, url) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+function copyToClipBoard(text) {
+    const input = document.createElement('textarea');
+    input.innerHTML = text;
+    document.body.appendChild(input);
+    input.select();
+    const result = document.execCommand('copy');
+    document.body.removeChild(input);
+    return result;
+}
+
 export {
-    getParameterByName
+    getParameterByName,
+    copyToClipBoard
 }
