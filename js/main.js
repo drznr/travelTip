@@ -39,6 +39,9 @@ function focusGeoLocation(location) {
                         .then(res=> renderLocationName(res.results[0].address_components[1].long_name, res.results[0].address_components[3].short_name, { lat: pos.lat, lng: pos.lng }))
                         .catch(err => { throw new Error(err) });
                     mapService.addMarker({ lat: pos.lat, lng: pos.lng });
+
+                    weatherService.getCurrentWeather(pos.lat, pos.lng)
+                        .then(res => renderWeatherWidg(res));
                 })
                 .catch(console.log('INIT MAP ERROR'));
         })
@@ -54,6 +57,9 @@ function focusGeoLocation(location) {
                         .then(res=> renderLocationName(res.results[0].address_components[1].long_name, res.results[0].address_components[3].short_name, { lat: pos.coords.latitude, lng: pos.coords.longitude }))
                         .catch(err => { throw new Error(err) });
                     mapService.addMarker({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+
+                    weatherService.getCurrentWeather(pos.coords.latitude, pos.coords.longitude)
+                        .then(res => renderWeatherWidg(res));
                 })
                 .catch(console.log('INIT MAP ERROR'));
         })
@@ -68,4 +74,15 @@ function renderLocationName(city, country, loc) {
     let strHtml = `<h2 data-url="${window.location.href + `?&lat=${loc.lat}&lng=${loc.lng}`}"><strong>Location</strong>: ${city}, ${country}</h2>`;
     
     elLocContainer.innerHTML = strHtml;
+}
+
+function renderWeatherWidg(weather) {
+    const strHTML = `<li><ul>
+                    <li class="w-icon"><img src="http://openweathermap.org/img/wn/${weather.icon}@2x.png"></li>
+                    <li class="location">${weather.loaction}, ${weather.country} <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/${weather.country.toLowerCase()}.svg"> ${weather.type}</li>
+                    <li class="temp">${weather.tempC}°C | ${weather.tempF}°F</li>
+                    <li class="wind">Wind Speed ${weather.windKmHr} km/h</li>
+                    </ul></li>`
+
+    document.querySelector('.weather-breakdown').innerHTML = strHTML
 }

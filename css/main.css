@@ -1,6 +1,14 @@
 * {
     box-sizing: border-box;
 }
+ul{
+    padding: 0;
+    display: inline-block;
+    text-align: center;
+}
+h1, h2, h3, h4, h5{
+    margin: 0;
+}
 .header {
     display: flex;
     justify-content: space-between;
@@ -9,4 +17,37 @@
 }
 .location-container {
     margin-block-end: 30px;
+} 
+.map{
+    margin-bottom: 20px;
+}
+.weather-widg-container{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+.weather-title{
+    text-align: center;
+    font-size: 2rem;
+}
+.weather-widg-wrap{
+    background-color: lightskyblue;
+    border: solid 1px black;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+}
+.weather-breakdown{
+    display: inline-block;
+}
+.weather-breakdown li{
+    list-style-type: none;
+    font-weight: 600;
+    font-size: 1em;
+}
+.location{
+    text-transform: capitalize;
+}
+.flag{
+    width: 1.5em;    
 }
