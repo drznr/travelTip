@@ -24,9 +24,3 @@ function getCurrentWeather(lat = 32.0749831, lng = 34.9120554) {
             return currentWeather
         })
 }
-
-
-// this will go in the main
-// weatherService.getCurrentWeather()
-//     .then(res => console.log(res)
-//     )
