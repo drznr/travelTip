@@ -10,7 +10,6 @@ const WEATHER_KEY = '0842198d900c6bb69d303eab2504a6fa'
 function getCurrentWeather(lat = 32.0749831, lng = 34.9120554) {
     return axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${WEATHER_KEY}`)
         .then(res => {
-            console.log(res);
             
             var currentWeather = {
                 type: res.data.weather[0].description,
