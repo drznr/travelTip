@@ -1,13 +1,14 @@
 'use strict'
 
-export const weatherService = {
-    getCurrentWeather,
-}
+import { getParameterByName } from '../utils.js'
 
 const WEATHER_KEY = '0842198d900c6bb69d303eab2504a6fa'
 
 
-function getCurrentWeather(lat = 32.0749831, lng = 34.9120554) {
+function getCurrentWeather(lat, lng) {
+    lat = (getParameterByName('lat')) ? +getParameterByName('lat') : lat;
+    lng = (getParameterByName('lng')) ? +getParameterByName('lng') : lng;
+
     return axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${WEATHER_KEY}`)
         .then(res => {
             
@@ -22,4 +23,8 @@ function getCurrentWeather(lat = 32.0749831, lng = 34.9120554) {
             }
             return currentWeather
         })
+}
+
+export const weatherService = {
+    getCurrentWeather,
 }

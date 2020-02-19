@@ -72,7 +72,6 @@ function renderWeatherWidg(weather) {
 function _renderMap(pos) {
     mapService.initMap(pos.lat, pos.lng)
         .then(() => {
-
             mapService.getLocationName({ lat: pos.lat, lng: pos.lng })
                 .then(res => renderLocationName(res.results[0].address_components[1].long_name, res.results[0].address_components[3].short_name, { lat: pos.lat, lng: pos.lng }))
                 .catch(err => { throw new Error(err) });
