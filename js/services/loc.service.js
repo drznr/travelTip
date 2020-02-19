@@ -14,6 +14,8 @@ function getPosition() {
 
     return new Promise((resolve, reject) => {
         navigator.geolocation.getCurrentPosition(resolve, reject)
+        .then()
+        .catch()
     })
 }
 
@@ -23,3 +25,8 @@ export default {
     getLocs: getLocs,
     getPosition: getPosition
 }
+
+
+navigator.geolocation.getCurrentPosition(position => {
+    gCoords.lat = position.coords.latitude;
+    gCoords.long = position.coords.longitude;
