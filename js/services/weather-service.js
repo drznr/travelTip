@@ -1,13 +1,15 @@
 'use strict'
 
-export var weatherService = {
+export const weatherService = {
 
 }
 
 const WEATHER_KEY = '0842198d900c6bb69d303eab2504a6fa'
 
 
-function getCurrentWeather
+function getCurrentWeather(){
+    axios.get()
+}
 
 
 
