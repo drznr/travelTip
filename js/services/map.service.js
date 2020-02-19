@@ -17,7 +17,6 @@ export function initMap(lat, lng) {
                 center: { lat, lng },
                 zoom: 15
             })
-            console.log('Map!', map);
         })
 }
 
