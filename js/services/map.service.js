@@ -36,7 +36,9 @@ function getLocationName(loc) {
     return new Promise((resolve, reject) => {
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${loc.lat},${loc.lng}&key=${API_KEY}`)
         .then(res=> {
-            const city = res.data.results[0].address_components[3].short_name;
+            console.log(res.data)
+
+            const city = res.data.results[0].address_components[2].short_name;
             const street = res.data.results[0].address_components[1].long_name;
             resolve({city: city, street: street});
         })
