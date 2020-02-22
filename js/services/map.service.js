@@ -1,14 +1,9 @@
 
-import { getParameterByName } from '../utils.js'
-
-
 var map;
 const API_KEY = 'AIzaSyAGbEdxYFy-sQJvbvW1KEt3k4l1197qWN4'; 
 
 
 export function initMap(lat, lng) {
-    lat = (getParameterByName('lat')) ? +getParameterByName('lat') : lat;
-    lng = (getParameterByName('lng')) ? +getParameterByName('lng') : lng;
 
     return _connectGoogleApi()
         .then(() => {
@@ -21,8 +16,6 @@ export function initMap(lat, lng) {
 }
 
 function addMarker(loc) {
-    loc.lat = (getParameterByName('lat')) ? +getParameterByName('lat') : loc.lat;
-    loc.lng = (getParameterByName('lng')) ? +getParameterByName('lng') : loc.lng;
 
 
     var marker = new google.maps.Marker({
@@ -39,12 +32,14 @@ function panTo(lat, lng) {
 }
 
 function getLocationName(loc) {
-    loc.lat = (getParameterByName('lat')) ? +getParameterByName('lat') : loc.lat;
-    loc.lng = (getParameterByName('lng')) ? +getParameterByName('lng') : loc.lng;
     
     return new Promise((resolve, reject) => {
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${loc.lat},${loc.lng}&key=${API_KEY}`)
-        .then(res=> resolve(res.data))
+        .then(res=> {
+            const city = res.data.results[0].address_components[3].short_name;
+            const street = res.data.results[0].address_components[1].long_name;
+            resolve({city: city, street: street});
+        })
         .catch(reject);
     })
 }
@@ -52,7 +47,10 @@ function getLocationName(loc) {
 function getLocationCoords(name) {
     return new Promise((resolve, reject) => {
         axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${name}&key=${API_KEY}`)
-        .then(res=> resolve(res.data))
+        .then(res=> {
+            const pos = res.data.results[0].geometry.location;
+            resolve(pos);
+        })
         .catch(reject);
     })
 }

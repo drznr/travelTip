@@ -20,7 +20,7 @@ function copyToClipBoard(text) {
     return result;
 }
 
-export {
+export const utilsService = {
     getParameterByName,
     copyToClipBoard
 }
